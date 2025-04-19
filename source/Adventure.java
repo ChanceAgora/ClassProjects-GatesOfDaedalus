@@ -59,8 +59,8 @@ public class Adventure {
 	private static boolean npcCombat(Profile[] c, int numChars) {
 		boolean alive = true;
 		for(int i = 1; i < numChars; i++) {
-			if(c[0].isHere(c[i])) {
-				System.out.print("Rolling for initiative...");
+			if(c[0].isHere(c[i]) && c[i].isCombative()) {
+				System.out.println("Rolling for initiative...");
 				if(!rollForInitiative()) {
 					System.out.println(c[i].getName() + " is attacking");
 					if(c[i].hit(c[0])) {
@@ -101,10 +101,9 @@ public class Adventure {
 	private static boolean rollForInitiative() {
 		int myRoll = Die.roll(10);
 		int npcRoll = Die.roll(10);
-		
-		System.out.println("Rolling...");
 
 		if(myRoll >= npcRoll) {
+			System.out.println("You have initiative!");
 			return true;
 		}return false;
 	}

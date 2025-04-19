@@ -53,7 +53,7 @@ public class Profile {
 	}
 	public boolean isCombative() {
 		if(combative == 1) return true;
-		return false;
+		else return false;
 	}
 	public void arm(Item i) {
 		strength += i.offense;
