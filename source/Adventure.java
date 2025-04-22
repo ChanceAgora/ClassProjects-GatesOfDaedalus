@@ -124,6 +124,11 @@ public class Adventure {
 		for(int idx = 1; idx < numChars; idx++) {
 			if((c[0].xpos == c[idx].xpos) && (c[0].ypos == c[idx].ypos)) {
 				System.out.println(c[idx].getName() + " is here.");
+				if(c[idx].inventory.size() > 0) {
+					for(int i = 0; i < c[idx].inventory.size(); i++) {
+						System.out.println(c[idx].getName() + " has " + c[idx].inventory.get(i).name + ".");
+					}
+				}
 			}
 		}
 	}

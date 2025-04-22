@@ -7,7 +7,10 @@ public class Player extends Profile {
 		// TODO Auto-generated constructor stub
 	}
 	public void listInventory() {
-		if(inventory.size() == 0) System.out.println("You aren't carrying anything.");
+		if(inventory.size() == 0) {
+			System.out.println("You aren't carrying anything.");
+			return;
+		}
 		for(int i = 0; i < inventory.size(); i++) {
 			System.out.println("You hava a " + inventory.get(i).name + ".");
 		}
