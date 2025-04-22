@@ -25,6 +25,7 @@ public class Adventure {
 	public static Scanner s = new Scanner(System.in);
 
 	public static void main(String[] args) {
+		System.out.println("Welcome to the game! At any time, enter ?, help, or just h for a list of helpful commands available to you! Good luck!\n\n");
 		int maxProfiles = 20;
 		int numChars = 0;
 		String charFile = "../data/characters.csv";
@@ -150,6 +151,10 @@ public class Adventure {
 		}
 		char cmd = command.charAt(0);
 		switch(cmd) {
+			case 'h':
+			case '?':
+				listCommands();
+				break;
 			case 'i':
 				Player p = (Player)characters[0];
 				p.listInventory();
@@ -364,5 +369,16 @@ public class Adventure {
 			}
 		}
 		return result;
+	}
+	public static void listCommands() {
+		System.out.println("Here is a list of all available commands:");
+		System.out.println("N/S/E/W - Goe north, south, east, or west respectively. Note that if there are obstructions in the map or if a direction is impassible, it may not be possible to go in certain directions.");
+		System.out.println("A - Attack. This will attack any hostile characters in the same location.");
+		System.out.println("I - This will list what you are carrying in your inventory.");
+		System.out.println("G - Enter G followed by the space and the name of an item to grab it from the environment. Things that do not exist or are not in your location cannot be grabbed.");
+		System.out.println("D - Enter D followed by the name of an item in your inventory to drop it. It will be left in the location you drop it.");
+		System.out.println("T - You can attempt to steal items from characters in the game. You may not be sucessful though...");
+		System.out.println("U - Equip a specified item in your inventory for use.");
+		System.out.println("X - Enterint X at any time will quit the game.");
 	}
 }

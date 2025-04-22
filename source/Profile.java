@@ -12,7 +12,8 @@ public class Profile {
 	private short intelligence;
 	private short armor;
 	protected short hitPoints;
-	public Item armedWith;
+	public Item armedWithOffense = new Item();
+	public Item armedWithDefense = new Item();
 	ArrayList<Item> inventory = new ArrayList<Item>();
 	private short combative;
 	
@@ -29,7 +30,6 @@ public class Profile {
 		dexterity = dx;
 		intelligence = i;
 		armor = a;
-		armedWith = new Item();
 		combative = com;
 	}
 	public boolean takeHit(int damage) {
@@ -58,7 +58,8 @@ public class Profile {
 	public void arm(Item i) {
 		strength += i.offense;
 		armor += i.defense;
-		armedWith = i;
+		if(i.offense > 0) armedWithOffense = i;
+		if(i.defense > 0) armedWithDefense = i;
 	}
 	public void disarm(Item i) {
 		strength -= i.offense;

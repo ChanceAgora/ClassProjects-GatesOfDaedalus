@@ -14,5 +14,7 @@ public class Player extends Profile {
 		for(int i = 0; i < inventory.size(); i++) {
 			System.out.println("You hava a " + inventory.get(i).name + ".");
 		}
+		if(armedWithDefense != null) System.out.println("You have " + armedWithDefense.name + " equipped as defensive equipment.");
+		if(armedWithOffense != null) System.out.println("You have " + armedWithOffense.name + " equipped as offensive equipment.");
 	}
 }
