@@ -207,6 +207,8 @@ public class Adventure {
 			case 'a':
 				combat(characters, numChars);
 				break;
+			case 't':
+				steal(MapBlock[characters[0].xpos][characters[0].ypos], numChars, words);
 			case 'x':
 				playing = false;
 				break;
