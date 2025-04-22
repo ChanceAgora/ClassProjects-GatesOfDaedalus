@@ -50,6 +50,12 @@ public class Profile {
 	public void kill() {
 		combative = 0;
 		name = "Body of " + name;
+		disarmAll();
+		if(inventory.size() > 0) {
+			for(int i = 0; i < inventory.size(); i++) {
+
+			}
+		}
 	}
 	public boolean isCombative() {
 		if(combative == 1) return true;
@@ -61,10 +67,21 @@ public class Profile {
 		if(i.offense > 0) armedWithOffense = i;
 		if(i.defense > 0) armedWithDefense = i;
 	}
-	public void disarm(Item i) {
-		strength -= i.offense;
-		armor -= i.defense;
-		armedWith = null;
+	/**Unequips all equipped items in the player's inventory, setting the values to null.
+	**/
+	public void disarmAll() {
+		strength -= armedWithDefense.defense;
+		armor -= armedWithOffense.offense;
+		armedWithDefense = null;
+		armedWithOffense = null;
+	}
+	public void disarmOff() {
+		strength -= armedWithOffense.offense;
+		armedWithOffense = null;
+	}
+	public void disarmDef() {
+		armor -= armedWithDefense.defense;
+		armedWithDefense = null;
 	}
 	public void setName(String n) {
 		name = n;

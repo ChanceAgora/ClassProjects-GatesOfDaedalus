@@ -292,8 +292,6 @@ public class Adventure {
 				if(first == -1) {
 					short playerNum = Short.parseShort(data[1]);
 					c[playerNum].inventory.add(i);
-					if (c[playerNum].armedWith != null) c[playerNum].disarm(c[playerNum].armedWith);
-					c[playerNum].arm(i);
 				}else {
 					short xpos = Short.parseShort(data[0]);
 					short ypos = Short.parseShort(data[1]);
@@ -380,5 +378,22 @@ public class Adventure {
 		System.out.println("T - You can attempt to steal items from characters in the game. You may not be sucessful though...");
 		System.out.println("U - Equip a specified item in your inventory for use.");
 		System.out.println("X - Enterint X at any time will quit the game.");
+	}
+	public static void steal(Profile[] characters, int numChars, String itemName) {
+		for(int i = 1; i < numChars; i++) {
+			if(characters[0].isHere(characters[i]) != true || characters[i].inventory.size() == 0) continue;
+			for(int j = 0; j < characters[i].inventory.size(); j++) {
+				if(characters[i].inventory.get(j).name == itemName) {
+					if(Die.roll(20) + characters[0].getDexterity() > characters[i].getIntelligence()) {
+						if(characters[i].inventory.get(j).name == characters[i].armedWithOffense.name) characters[i].disarmOff();
+						if(characters[i].inventory.get(j).name == characters[i].armedWithDefense.name) characters[i].disarmDef();
+						characters[0].inventory.add(characters[i].inventory.remove(j));
+						System.out.println("You got it!");
+					}else {
+						System.out.print("You weren't able to steal it...");
+					}
+				}
+			}
+		}
 	}
 }
