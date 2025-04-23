@@ -158,6 +158,7 @@ public class Adventure {
 			case 'i':
 				Player p = (Player)characters[0];
 				p.listInventory();
+				break;
 			case 'n':
 				if(m[characters[0].xpos][characters[0].ypos].go(direction.NORTH)) {
 					characters[0].ypos--;
@@ -209,6 +210,7 @@ public class Adventure {
 				break;
 			case 't':
 				steal(characters, numChars, words);
+				break;
 			case 'x':
 				playing = false;
 				break;
@@ -383,9 +385,10 @@ public class Adventure {
 	}
 	public static void steal(Profile[] characters, int numChars, String itemName) {
 		for(int i = 1; i < numChars; i++) {
-			if(characters[0].isHere(characters[i]) != true || characters[i].inventory.size() == 0) continue;
+			if(!(characters[0].isHere(characters[i])) || characters[i].inventory.size() == 0) continue;
 			for(int j = 0; j < characters[i].inventory.size(); j++) {
-				if(characters[i].inventory.get(j).name == itemName) {
+				if(characters[i].inventory.get(j).name.equalsIgnoreCase(itemName)) {
+					System.out.println("\t\t" + characters[i].getName() + " has the item.");
 					if(Die.roll(20) + characters[0].getDexterity() > characters[i].getIntelligence()) {
 						if(characters[i].inventory.get(j).name == characters[i].armedWithOffense.name) characters[i].disarmOff();
 						if(characters[i].inventory.get(j).name == characters[i].armedWithDefense.name) characters[i].disarmDef();
