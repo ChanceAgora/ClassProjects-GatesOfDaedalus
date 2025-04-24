@@ -62,10 +62,20 @@ public class Profile {
 		else return false;
 	}
 	public void arm(Item i) {
+		boolean armed = false;
 		strength += i.offense;
 		armor += i.defense;
-		if(i.offense > 0) armedWithOffense = i;
-		if(i.defense > 0) armedWithDefense = i;
+		if(i.offense > 0) {
+			armed = true;
+			armedWithOffense = i;
+			System.out.println("You equipped " + i.name + " as your offensive weapon.");
+		}
+		if(i.defense > 0) {
+			armed = true;
+			armedWithDefense = i;
+			System.out.println("You equipped " + i.name + " as your defensive tool.");
+		}
+		if(armed == false) System.out.println("You carn't arm with a " + i.name + "!");
 	}
 	/**Unequips all equipped items in the player's inventory, setting the values to null.
 	**/
