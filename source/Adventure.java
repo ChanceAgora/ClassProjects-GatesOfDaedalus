@@ -151,6 +151,19 @@ public class Adventure {
 		}
 		char cmd = command.charAt(0);
 		switch(cmd) {
+			case 'u':
+				boolean hasItem = false;
+				if(characters[0].inventory.size() == 0) System.out.println("You have nothing to equip.");
+				else {
+					for(int i = 0; i < characters[0].inventory.size(); i++) {
+						if(characters[0].inventory.get(i).name.equalsIgnoreCase(words)) {
+							hasItem = true;
+							characters[0].arm(characters[0].inventory.get(i));
+						}
+					}
+				}
+				if(hasItem == false) System.out.println("You don't have " + words + ".");
+				break;
 			case 'h':
 			case '?':
 				listCommands();
