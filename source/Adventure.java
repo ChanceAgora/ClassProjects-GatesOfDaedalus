@@ -43,6 +43,7 @@ public class Adventure {
 		if(verify(m)) {
 			numChars = init(charFile, characters, m);
 			init(characters, m, itemFile);
+			characters[0].disarmAll();
 			while(playing) {
 				moveChars(m, characters, numChars);
 				showMap(m, characters);
