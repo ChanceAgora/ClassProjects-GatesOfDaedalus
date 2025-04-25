@@ -47,9 +47,14 @@ public class Adventure {
 				if(playing) {
 					playing = actionHandler(m, characters, numChars);
 				}
+				if(winCondition(characters)) {
+					System.out.println("\n\n");
+					System.out.println(winString);
+					playing = false;
+				}
 			}
 		}
-		System.out.println("Goodbye!");
+		if(winCondition(characters) == false) System.out.println("Goodbye!");
 		s.close();
 	}
 	private static boolean npcCombat(Profile[] c, int numChars) {
@@ -432,7 +437,7 @@ public class Adventure {
 		}else {
 			if(c[0].inventory.size() == 0 ) return false;
 			if(c[0].xpos == winX && c[0].ypos == winY) {
-				for(int i = 0; i < c[0].inventory.size9); i++) {
+				for(int i = 0; i < c[0].inventory.size(); i++) {
 					if(c[0].inventory.get(i).name.equalsIgnoreCase(winItem)) return true;
 				}
 			}
