@@ -49,7 +49,7 @@ public class Adventure {
 				}
 				if(winCondition(characters)) {
 					System.out.println("\n\n");
-					System.out.println(winString);
+					System.out.println(winString + "\n\n");
 					playing = false;
 				}
 			}
