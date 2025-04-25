@@ -3,24 +3,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-/* TO DO: 
-	* Validate Map
-	* Validate Players
-	* Move Players
-	* Items on Map
-	* Combat
-	* Characters hold Items 
-	* Inventory
-	* Kill Character
-	* Kill player
+/*  TO DO: 
 	* Graphical Map
-	* Steal
 	* Win
 */ 
 
 public class Adventure {
 	public static final int MAX_X = 10;
 	public static final int MAX_Y = 10;
+	public static int winX = -1;
+	public static int winY = -1;
+	public static String winItem = "";
+	public static String winString = "";
 
 	public static Scanner s = new Scanner(System.in);
 
@@ -283,6 +277,7 @@ public class Adventure {
 				}
 			}
 			br.close();
+			fr.close();
 			return pCount;
 		}catch(IOException e) {
 			System.out.println("File Error: " + filename);
@@ -317,6 +312,7 @@ public class Adventure {
 				}
 			}
 			br.close();
+			fr.close();
 		}catch(IOException e) {
 			System.out.println("File Error: " + filename);
 			e.printStackTrace();
@@ -337,6 +333,7 @@ public class Adventure {
 				m[xpos][ypos] = new MapBlock(data[2], data[3], Integer.parseInt(data[4]), Integer.parseInt(data[5]), Integer.parseInt(data[6]), Integer.parseInt(data[7]));
 			}
 			br.close();
+			fr.close();
 		}catch(IOException e) {
 			System.out.println("File Error: " + filename);
 			e.printStackTrace();
@@ -414,5 +411,32 @@ public class Adventure {
 				}
 			}
 		}
+	}
+	public static boolean winCondition(Profile[] c) {
+		if(winX == -1) {
+			try { 
+				FileReader check = new FileReader("../data/win.csv");
+				BufferedReader getCheck = new BufferedReader(check);
+				String temp = getCheck.readLine();
+				String[] vals = temp.split(",");
+				winX = Integer.parseInt(vals[0]);
+				winY = Integer.parseInt(vals[1]);
+				winItem = vals[2];
+				winString = vals[3];
+				check.close();
+				getCheck.close();
+			}catch(IOException e) {
+				System.out.println("Failed to find or read from file.");
+				e.printStackTrace();
+			}
+		}else {
+			if(c[0].inventory.size() == 0 ) return false;
+			if(c[0].xpos == winX && c[0].ypos == winY) {
+				for(int i = 0; i < c[0].inventory.size9); i++) {
+					if(c[0].inventory.get(i).name.equalsIgnoreCase(winItem)) return true;
+				}
+			}
+		}
+		return false;
 	}
 }
